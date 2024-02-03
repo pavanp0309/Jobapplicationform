@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JobApplication form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <script src="https://unpkg.com/html2pdf.js@0.10.0/dist/html2pdf.bundle.js"></script>
+    <script src="https://unpkg.com/html2canvas@0.5.0/dist/html2canvas.min.js"></script>
+    <!-- external css -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container-fluid" id="headerSection">
+      <div class="container my-3 p-3">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3 mx-auto">
+            <img
+              src="./1.png"
+              alt=""
+              id="companyLogo"
+              class="company_logo img-fluid"
+            />
+          </div>
+          <div class="col-12 col-sm-12 col-md-8 col-lg-8 my-auto mx-auto">
+            <h1 class="main-heading">TalentoLink Consultancy</h1>
+            <p class="sub-heading">
+              A joint venture of Seqtto software solution Pvt Ltd
+            </p>
+            <p class="address">
+              H.No 2-86, BommalaRamaram (Vill & Mdl), Yadadri-Bhongiri (Dist),
+              Telangana - 508126
+            </p>
+            <div class="">
+              <label for="">Email:</label>
+              <a
+                href="mailto:contcat@seqtto.com?cc=seqttosoftwaresolutions@gmail.com&subject=Regarding Job Vacancy"
+                target="_blank"
+              >
+                contcat@seqtto.com</a
+              >
+              &nbsp; &nbsp;
+              <label>Contact:</label>
+              <a href="tel:+91 7670998219"> +91 7670998219</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+    
+    <h2 class="fw-bold text-center display-5">Job Vacancy Form</h2>
+    <div class="container">
+      <!-- form start  -->
+      <form id="jobForm">
+        <!-- company details start -->
+        
+        <fieldset class="reset p-3 my-3 shadow-sm p-3 mb-5 bg-body-tertiary">
+          <legend class="reset">CompanyDetails</legend>
+          <div class="row p-3">
+            <div class="col-md-6 company">
+              <label for="companyName" class="form-label">Company Name:</label>
+              <input type="text" class="form-control" id="companyName" />
+            </div>
+            <div class="col-md-6">
+              <label for="companyType" class="form-label">Company Type:</label>
+              <select
+                id="companyType"
+                class="form-select"
+                aria-label="Default select example"
+                required
+              >
+                <option value="" selected disabled>Select Company Type</option>
+                <option value="Ltd">Ltd Company</option>
+                <option value="PvtLtd">Pvt Ltd Company</option>
+                <option value="OPC">One Person Company</option>
+                <option value="MSME">MSME</option>
+                <option value="SoleProprietorship">Sole Proprietorship</option>
+                <option value="EducationInstitutions">
+                  Education Institutions
+                </option>
+                <option value="FinancialInstitutions">
+                  Financial Institutions
+                </option>
+                <option value="CharitableTrust">Charitable Trust</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="companyemail" class="form-label">Company Email:</label>
+              <input type="email" id="companyemail" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+              <span id="emailError" style="color: red;"></span>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="companycontact" class="form-label"
+                >Company Mobile Number:</label
+              >
+              <input type="tel" id="companycontact" class="form-control" pattern="[0-9]{10}" oninput="validateMobileNumber('companycontact', 'mobileNumberError')" required/>
+              <span id="mobileNumberError" style="color: red;"></span>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="reset p-3 my-3 shadow-sm p-3 mb-5 bg-body-tertiary">
+          <legend class="reset">AddressDetails</legend>
+          <div class="row p-3 address">
+            <div class="col-md-6 ">
+              <label for="doorNo" class="form-label">Door No:</label>
+              <input type="text" class="form-control" id="doorNo" required />
+            </div>
+            <div class="col-md-6 ">
+              <label for="locality" class="form-label">Locality:</label>
+              <input type="text" class="form-control" id="locality" required />
+            </div>
+            <div class="col-md-6">
+              <label for="city" class="form-label">City:</label>
+              <select id="city" onchange="updateState()" class="form-select" aria-label="Default select example">
+                 <option value="" selected disabled>Select City</option>
+                 <option value="Hyderabad">Hyderabad</option>
+                 <option value="Vizag">Vizag</option>
+                 <option value="Bangalore">Bangalore</option>
+                 <option value="Chennai">Chennai</option>
+                 <option value="Gurgaon">Gurgaon</option>
+                 <option value="Noida">Noida</option>
+                 <option value="Kochi">Kochi</option>
+                 <option value="Mumbai">Mumbai</option>          
+              </select>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="State" class="form-label">State:</label>
+              <select id="State" onchange="updateState()" class="form-select" aria-label="Default select example" required>
+                  <option value="" selected disabled>Select State</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="TamilNadu">TamilNadu</option>
+                  <option Value="Maharashtra">Maharashtra</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Kerala">Kerala</option>
+              </select>
+            </div>
+            <div class="col-md-12  mb-2">
+              <label for="pincode" class="form-label">Pincode:</label>
+              <input type="text" id="pincode" pattern="[0-9]{6}" oninput="validatePincode()" required class="form-control"><br>
+              <span id="pincodeError" style="color: red;"></span>
+            </div>
+          </div>
+        </fieldset>
+        <!-- incharge details:1 -->
+        <fieldset class="reset p-3 my-3 shadow-sm p-3 mb-5 bg-body-tertiary">
+          <legend class="reset">Incharge Deatils</legend>
+          <div class="row p-3 Inchargedetails">
+            <div class="col-md-6 ">
+              <label for="personName" class="form-label">Name of the Employee:</label>
+              <input type="text" id="personName" required class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label for="incharge1Position" class="form-label">Designation:</label>
+              <select id="incharge1Position" class="form-select" required>
+                  <option value="" selected disabled>Select Position</option>
+                  <option value="Director">Director</option>
+                  <option value="CEO">CEO</option>
+                  <option value="'Manager">Manager</option>
+                  <option value="Human Resource">HR</option>
+                  <option value="Project Manager">Project Manager</option>
+                  <option value="Team Leader">Team Lead</option>
+                  <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="incharge1ContactNumber" class="form-label"> Contact Number:</label>
+              <input type="tel" id="incharge1ContactNumber" class="form-control" pattern="[0-9]{10}" oninput="validateIncharge1MobileNumber('incharge1ContactNumber', 'mobileNumberError1')" required>
+              <p id="mobileNumberError1" style="color: red;"></p>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="incharge1Email" class="form-label">Email:</label>
+              <input type="email" id="incharge1Email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+              <span id="emailError" style="color: red;"></span>
+            </div>
+          </div>
+        </fieldset>
+        <!-- incharge details:2 -->
+        <fieldset class="reset p-3 my-3 shadow-sm p-3 mb-5 bg-body-tertiary">
+          <legend class="reset">Incharge2 Deatils</legend>
+          <div class="row p-3">
+            <div class="col-md-6 ">
+              <label for="incharge2Name" class="form-label">Name of the Employee:</label>
+              <input type="text" id="incharge2Name" required class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label for="incharge2Position" class="form-label">Designation:</label>
+              <select id="incharge2Position" class="form-select" required>
+                  <option value="" selected disabled>Select Position</option>
+                  <option value="Director">Director</option>
+                  <option value="CEO">CEO</option>
+                  <option value="'Manager">Manager</option>
+                  <option value="Human Resource">HR</option>
+                  <option value="Project Manager">Project Manager</option>
+                  <option value="Team Leader">Team Lead</option>
+                  <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="incharge2ContactNumber" class="form-label"> Contact Number:</label>
+              <input type="tel" id="incharge2ContactNumber" class="form-control" pattern="[0-9]{10}" oninput="validateIncharge2MobileNumber('incharge2ContactNumber', 'mobileNumberError2')" required>
+              <p id="mobileNumberError2" style="color: red;"></p>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="incharge2Email" class="form-label">Email:</label>
+              <input type="email" id="incharge2Email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+              <span id="emailError" style="color: red;"></span>
+            </div>
+          </div>
+        </fieldset>
+        <!-- incharge details :2 end -->
+      
+          <div class="table-responsive p-3 border my-3 shadow-sm p-3 mb-5 bg-body-tertiary" >
+            <table class="table" id="vacancyTable">
+                <thead>
+                  <tr class="p-3 mx-auto">
+                    <th>S.No</th>
+                    <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Qualification</th>
+                    <th>Experience</th>
+                    <th>Certificates</th>
+                    <th>No.Vacancy</th>
+                    <th>Upload JD</th>
+                </tr>
+                <!-- dynamic rows will be displayed -->
+                </thead>
+
+            </table>
+            <div class="col-md-12 mx-auto text-center">
+              <button type="button" class="btn btn-primary" onclick="addPosition()">Add Position</button>
+              <button type="button" class="btn btn-primary" onclick="deleteLastPosition()">Delete </button>
+            </div>
+
+        </div>
+        
+        <div class="col-md-12  border mb-3 p-3 d-flex justify-content-between align-items-center shadow-sm p-3 mb-5 bg-body-tertiary ">
+          <div id="totalVacancy">Total Vacancy Count: 0</div>
+          <button type="button" class="btn btn-success  " onclick="submitForm()">Submit Form</button>
+        </div>
+        <!-- Company Details end -->
+      </form>
+      <!-- printing details -->
+      <div id="entryDetails" style="display: none;">
+        <h2>Entry Details</h2>
+        <p id="uniqueNumberDisplay"></p>
+        <p id="companyNameDisplay"></p>
+        <p id="addressDisplay"></p>
+        <p id="inchargeNameDisplay"></p>
+        <p id="contactNumberDisplay"></p>
+      <div class="table-responsive p-3 border my-3 shadow-sm p-3 mb-5 bg-body-tertiary">
+       <table id="entryDetailsTable" class="table">
+             <tr>
+                <th>S.No</th>
+                <th>Position</th>
+                <th>Educational Qualification</th>
+                <th>Experience</th>
+                <th>Category</th>
+                <th>Vacancy Details</th>
+            </tr>
+    </table>
+    </div>
+</div>
+ <button type="button" class="btn btn-success" onclick="printDetails()" id="printDetailsButton" style="display: none;">Print</button>
+    </div>
+  </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+<!-- external script file -->
+
+<script src="./script.js"></script>
+
+
+  </body>
+</html>
